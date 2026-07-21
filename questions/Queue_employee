@@ -1,0 +1,99 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#define max 6
+
+struct employee{
+    int id;
+    int age;
+    char name[25];
+    int salary;
+};
+struct employee queue[max];
+int front=0;
+int rear=-1;
+int itemcount=0;
+void enqueue(){
+    if(rear==max && front==0){
+        printf("overflow!");
+    }
+    else{
+        rear++;
+        printf("\nEnter Employee ID : ");
+        scanf("%d", &queue[rear].id);
+        printf("Enter Employee Name : ");
+        scanf("%s", queue[rear].name);
+        printf("Enter Employee Age : ");
+        scanf("%d", &queue[rear].age);
+        printf("Enter Employee Salary : ");
+        scanf("%f", &queue[rear].salary);
+        printf("\nEmployee Added Successfully!\n");
+    }
+}
+void dequeue(){
+    if (front==-1 && rear==-1){
+        printf("underflow1");
+    }
+    else{
+        printf("\nDeleted Employee Details\n");
+        printf("ID     : %d\n", queue[front].id);
+        printf("Name   : %s\n", queue[front].name);
+        printf("Age    : %d\n", queue[front].age);
+        printf("Salary : %.2f\n", queue[front].salary);
+        front++;
+    }
+}
+void display(){
+    int i;
+    if(front==-1){
+        printf("underflow");
+    }
+    else{
+        for (i=front; i<=rear;i++){
+            printf("\nDeleted Employee Details\n");
+            printf("ID     : %d\n", queue[i].id);
+            printf("Name   : %s\n", queue[i].name);
+            printf("Age    : %d\n", queue[i].age);
+            printf("Salary : %.2f\n", queue[i].salary);
+        }
+    }
+}
+int main()
+{
+    int choice;
+
+    while(1)
+    {
+        printf("\n===== Employee Queue Menu =====\n");
+        printf("1. Enqueue Employee\n");
+        printf("2. Dequeue Employee\n");
+        printf("3. Display Queue\n");
+        printf("4. Exit\n");
+
+        printf("Enter your choice : ");
+        scanf("%d", &choice);
+
+        if(choice == 1)
+        {
+            enqueue();
+        }
+        else if(choice == 2)
+        {
+            dequeue();
+        }
+        else if(choice == 3)
+        {
+            display();
+        }
+        else if(choice == 4)
+        {
+            printf("\nProgram Ended.\n");
+            break;
+        }
+        else
+        {
+            printf("\nInvalid Choice!\n");
+        }
+    }
+    return 0;
+}
