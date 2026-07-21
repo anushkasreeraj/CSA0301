@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define max 10
+struct message
+{
+    char text[100];
+};
+struct message queue[max];
+int front = 0;
+int rear = -1;
+void enqueue()
+{
+    if(rear == max)
+    {
+        printf("\nQueue Overflow!\n");
+    }
+    else
+    {
+        rear++;
+        printf("\nEnter Message : ");
+        scanf(" %[^\n]", queue[rear].text);
+        printf("\nMessage Added Successfully!\n");
+    }
+}
+void dequeue()
+{
+    if(front > rear)
+    {
+        printf("\nQueue Underflow! No Messages.\n");
+    }
+    else
+    {
+        printf("\nDeleted Message : %s\n", queue[front].text);
+        front++;
+    }
+}
+
+void display()
+{
+    int i;
+
+    if(front > rear)
+    {
+        printf("\nNo Messages in Queue.\n");
+    }
+    else
+    {
+        printf("\nMessages in Queue:\n");
+        printf("---------------------------\n");
+
+        for(i = front; i <= rear; i++)
+        {
+            printf("%d. %s\n", i - front + 1, queue[i].text);
+        }
+    }
+}
+
+int main()
+{
+    int choice;
+
+    while(1)
+    {
+        printf("\n===== MESSAGE QUEUE MENU =====\n");
+        printf("1. Enqueue Message\n");
+        printf("2. Dequeue Message\n");
+        printf("3. Display Messages\n");
+        printf("4. Exit\n");
+        printf("Enter your choice : ");
+        scanf("%d", &choice);
+        if(choice == 1)
+            enqueue();
+        else if(choice == 2)
+            dequeue();
+        else if(choice == 3)
+            display();
+        else if(choice == 4)
+        {
+            printf("\nProgram Ended.\n");
+            break;
+        }
+        else
+            printf("\nInvalid Choice!\n");
+    }
+
+    return 0;
+}
